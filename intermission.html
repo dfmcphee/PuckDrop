@@ -1,0 +1,52 @@
+<head>
+  <title>PuckDrop</title>
+  <meta name="viewport" content="width=device-width" />
+  <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/slate/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="outer" class="container">
+    <h1>PuckDrop</h1>
+    {{> scoreboard}}
+  </div>
+</body>
+
+
+<template name="scoreboard">
+  <div class="scoreboard">
+    {{#each games}}
+      {{> game}}
+    {{/each}}
+    <div class="upcoming">
+    {{#each upcoming}}
+      {{> game}}
+    {{/each}}
+    </div>
+  </div>
+</template>
+
+
+<template name="game">
+  <div class="game well">
+    <div class="row">
+      <div class="col-sm-4 align-center">
+        <h2>{{atn}}</h2>
+        <p class="lead">{{ats}}</p>
+        <p class="small">Shots: {{currentEvent.a.tot.s}}</p>
+      </div>
+      
+      <div class="col-sm-4 align-center">
+        <h3>{{timeRemaining}} - {{bs}}</h3>
+      <span class="start-time"></span>
+        <p class="lead">vs.<p>
+        <p>{{countdown}}</p>
+      </div>
+      
+      <div class="col-sm-4 align-center">
+        <h2>{{htn}}</h3>
+        <p class="lead">{{hts}}</p>
+        <p class="small">Shots: {{currentEvent.h.tot.s}}</p>
+      </div>
+    </div>
+  </div>
+</template>
