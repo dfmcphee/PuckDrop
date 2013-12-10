@@ -1,51 +1,95 @@
 <head>
   <title>PuckDrop</title>
   <meta name="viewport" content="width=device-width" />
-  <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/slate/bootstrap.min.css" rel="stylesheet">
+  <link href="http://jasonbradley.me/bootstrap-ios7/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="http://jasonbradley.me/bootstrap-ios7/docs-assets/css/docs.css" rel="stylesheet">
 </head>
 
 <body>
-  <div id="outer" class="container">
-    <h1>PuckDrop</h1>
     {{> scoreboard}}
-  </div>
 </body>
 
 
 <template name="scoreboard">
-  <div class="scoreboard">
-    {{#each games}}
-      {{> game}}
-    {{/each}}
-    <div class="upcoming">
-    {{#each upcoming}}
-      {{> game}}
-    {{/each}}
+  <header class="navbar navbar-fixed-top" role="banner">
+    <div class="container {{selected}} nav-wrap">
+        <div class="row">
+          <div class="col-xs-3 back-button">
+            <input type="button" class="btn btn-default hide-details" value="Back" />
+          </div>
+          <div class="col-xs-6 site-title">
+            <h1>PuckDrop</h1>
+          </div>
+        </div>
+    </div>
+  </header>
+  <div id="outer" class="container">
+    <div class="scoreboard {{details}}">
+      {{#each games}}
+        {{> game}}
+      {{/each}}
+      <div class="upcoming">
+      {{#each upcoming}}
+        {{> game}}
+      {{/each}}
+      </div>
     </div>
   </div>
 </template>
 
 
 <template name="game">
-  <div class="game well">
+  <div class="game {{selected}}">
+    <div class="row">
+      <div class="col-sm-12">
+        <input type="button" class="btn btn-default show-details pull-right" value="Show Details" />
+      </div>
+    </div>
     <div class="row">
       <div class="col-sm-4 align-center">
         <h2>{{atn}}</h2>
         <p class="lead">{{ats}}</p>
-        <p class="small">Shots: {{currentEvent.a.tot.s}}</p>
+        <p class="small">Shots: {{awayShots}}</p>
       </div>
       
       <div class="col-sm-4 align-center">
-        <h3>{{timeRemaining}} - {{bs}}</h3>
-      <span class="start-time"></span>
-        <p class="lead">vs.<p>
+        <p class="lead vs">vs.<p>
+        <h3><span class="start-time">{{timeRemaining}}</span> - {{bs}}</h3>
         <p>{{countdown}}</p>
       </div>
       
       <div class="col-sm-4 align-center">
         <h2>{{htn}}</h3>
         <p class="lead">{{hts}}</p>
-        <p class="small">Shots: {{currentEvent.h.tot.s}}</p>
+        <p class="small">Shots: {{homeShots}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="details {{selected}}">
+    <div class="row">
+      <div class="col-sm-6">
+        {{#if plays}}
+          <div id="{{id}}-details" class="plays">
+            <h3>Play-by-play</h3>
+            <div class="play-details">
+              {{#each getPlays plays}}
+                <p>{{le.desc}}</p>
+              {{/each}}
+            </div>
+          </div>
+        {{/if}}
+      </div>
+      <div class="col-sm-6">
+        {{#if goals}}
+          <div id="{{id}}-goals" class="goals">
+            <h3>Goals</h3>
+            <div class="goal-details">
+              {{#each goals}}
+                <p>{{le.desc}}</p>
+              {{/each}}
+            </div>
+          </div>
+        {{/if}}
       </div>
     </div>
   </div>

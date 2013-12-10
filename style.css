@@ -1,3 +1,85 @@
 .align-center {
   text-align: center;
 }
+
+.align-right {
+  text-align: right;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.navbar.navbar-fixed-top {
+  background: rgba(255,255,255,0.9);
+  border-bottom: solid 1px #999;
+}
+
+.nav-wrap {
+  margin-top:10px;
+}
+
+.navbar .site-title {
+  text-align: center;
+}
+
+.navbar .site-title h1 {
+  font-size: 1.5em;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.navbar .site-sitel h1 a {
+  color:#494949;
+}
+
+.navbar .site-title a:hover {
+  color: #3b3b3b;
+  text-decoration: none;
+}
+
+.game {
+  border: solid 1px #999;
+  padding:15px;
+  border-radius: 3px;
+  margin-top: 10px;
+  margin-bottom:10px;
+}
+
+.lead.vs {
+  font-size:3em;
+}
+
+.details .game {
+  display:none;
+}
+
+.details .game.selected {
+  display:block;
+}
+
+.details .plays,
+.details .goals {
+  display:none;
+}
+
+.details.selected .plays, 
+.details.selected .goals {
+  display:block;
+}
+
+.game .btn.show-details {
+  display:block;
+}
+
+.game.selected .show-details {
+  display:none;
+}
+
+.btn.hide-details {
+  display:none;
+}
+
+.selected .hide-details {
+  display:block;
+}

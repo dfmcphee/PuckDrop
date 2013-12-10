@@ -7,13 +7,40 @@ refreshEvents = function(gameId) {
       function (error, result) {
         var res = result.content.slice(result.content.indexOf('{'), result.content.lastIndexOf('}') + 1);
         res = JSON.parse(res);
-        //console.log(res);
+
         if (!error) {
           var game = Games.findOne({id: gameId}, {});
           if (typeof(game) !== 'undefined' && game && res && res.le) {
             if (!game.currentEvent) {
               game.currentEvent = {};
             }
+            if (!game.plays) {
+              game.plays = [];
+            }
+            if (!game.goals) {
+              game.goals = [];
+            }
+            
+            if (game.currentEvent.le && res.le.id !== game.currentEvent.le.id) {
+              game.plays.unshift(res); 
+            }
+            
+            if (res.le && res.le.type === "505" || res.le && res.le.type === 505 ) {
+              if (!game.lastGoal) {
+                game.goals.push(res);
+                game.lastGoal = res;
+              }
+              else if (game.lastGoal.le && res.le.id !== game.lastGoal.le.id) {
+                game.goals.push(res);
+                game.lastGoal = res;
+              }
+            }
+            
+            if (res.h.tot.s && res.a.tot.s) {
+              game.awayShots = res.a.tot.s;
+              game.homeShots = res.h.tot.s;
+            }
+            
             if (game.currentEvent.cr === false && res.cr === true) {
               console.log('Starting clock.');
               game.clockRunning = true;

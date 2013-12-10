@@ -9,5 +9,4 @@ insecure
 preserve-inputs
 http
 ejson
-bootstrap-3
 moment
